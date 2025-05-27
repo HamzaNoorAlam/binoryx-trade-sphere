@@ -7,11 +7,24 @@ import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { TrendingUp, TrendingDown, Users, Activity, DollarSign, Target } from 'lucide-react';
 
+interface Trade {
+  id: string;
+  userId: string;
+  userEmail: string;
+  asset: string;
+  amount: number;
+  direction: string;
+  status?: string;
+  timeLeft?: number;
+  result?: string;
+  timestamp?: string;
+}
+
 const AdminPanel = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const { toast } = useToast();
 
-  const activeTrades = [
+  const activeTrades: Trade[] = [
     { id: 'T001', userId: 'U123', userEmail: 'john@example.com', asset: 'EUR/USD', amount: 50.00, direction: 'UP', timeLeft: 45, status: 'Active' },
     { id: 'T002', userId: 'U456', userEmail: 'sarah@example.com', asset: 'BTC/USD', amount: 100.00, direction: 'DOWN', timeLeft: 12, status: 'Active' },
     { id: 'T003', userId: 'U789', userEmail: 'mike@example.com', asset: 'GBP/USD', amount: 25.00, direction: 'UP', timeLeft: 78, status: 'Active' },
@@ -19,7 +32,7 @@ const AdminPanel = () => {
     { id: 'T005', userId: 'U654', userEmail: 'alex@example.com', asset: 'XAU/USD', amount: 60.00, direction: 'UP', timeLeft: 156, status: 'Active' }
   ];
 
-  const recentTrades = [
+  const recentTrades: Trade[] = [
     { id: 'T006', userId: 'U987', userEmail: 'lisa@example.com', asset: 'AUD/USD', amount: 40.00, direction: 'DOWN', result: 'Pending', timestamp: '2024-01-15 14:32:05' },
     { id: 'T007', userId: 'U147', userEmail: 'david@example.com', asset: 'USD/CAD', amount: 80.00, direction: 'UP', result: 'Pending', timestamp: '2024-01-15 14:30:22' },
     { id: 'T008', userId: 'U258', userEmail: 'maria@example.com', asset: 'ETH/USD', amount: 120.00, direction: 'DOWN', result: 'Pending', timestamp: '2024-01-15 14:28:15' }
@@ -100,8 +113,8 @@ const AdminPanel = () => {
               <div key={trade.id} className="p-4 border rounded-lg">
                 <div className="flex items-center justify-between mb-3">
                   <div className="font-semibold">{trade.id}</div>
-                  <Badge variant={trade.status === 'Active' ? 'default' : 'secondary'}>
-                    {trade.status || 'Pending'}
+                  <Badge variant={(trade.status === 'Active' || trade.result === 'Pending') ? 'default' : 'secondary'}>
+                    {trade.status || trade.result || 'Completed'}
                   </Badge>
                 </div>
                 <div className="space-y-2 text-sm">
@@ -182,8 +195,8 @@ const AdminPanel = () => {
                       </div>
                     </td>
                     <td className="py-3">
-                      <Badge variant={trade.status === 'Active' ? 'default' : 'secondary'}>
-                        {trade.status || 'Pending'}
+                      <Badge variant={(trade.status === 'Active' || trade.result === 'Pending') ? 'default' : 'secondary'}>
+                        {trade.status || trade.result || 'Completed'}
                       </Badge>
                     </td>
                     <td className="py-3">
