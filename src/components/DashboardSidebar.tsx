@@ -10,7 +10,8 @@ import {
   User, 
   LogOut,
   Download,
-  Upload
+  Upload,
+  History
 } from 'lucide-react';
 
 const DashboardSidebar = () => {
@@ -23,6 +24,7 @@ const DashboardSidebar = () => {
     { icon: Upload, label: 'Deposit', path: '/dashboard/deposit' },
     { icon: Download, label: 'Withdraw', path: '/dashboard/withdraw' },
     { icon: Wallet, label: 'Wallet', path: '/dashboard/wallet' },
+    { icon: History, label: 'Trade History', path: '/dashboard/history' },
     { icon: User, label: 'Profile', path: '/dashboard/profile' }
   ];
 

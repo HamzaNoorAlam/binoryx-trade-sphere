@@ -24,6 +24,7 @@ import TradingRoom from "./pages/dashboard/TradingRoom";
 import DepositPage from "./pages/dashboard/DepositPage";
 import WithdrawPage from "./pages/dashboard/WithdrawPage";
 import WalletPage from "./pages/dashboard/WalletPage";
+import TradeHistory from "./pages/dashboard/TradeHistory";
 import ProfilePage from "./pages/dashboard/ProfilePage";
 
 // Admin Pages
@@ -33,6 +34,7 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminTrades from "./pages/admin/AdminTrades";
 import AdminDeposits from "./pages/admin/AdminDeposits";
 import AdminWithdrawals from "./pages/admin/AdminWithdrawals";
+import AdminPanel from "./pages/admin/AdminPanel";
 
 import NotFound from "./pages/NotFound";
 
@@ -64,6 +66,7 @@ const App = () => (
               <Route path="deposit" element={<DepositPage />} />
               <Route path="withdraw" element={<WithdrawPage />} />
               <Route path="wallet" element={<WalletPage />} />
+              <Route path="history" element={<TradeHistory />} />
               <Route path="profile" element={<ProfilePage />} />
             </Route>
 
@@ -74,6 +77,7 @@ const App = () => (
               <Route path="trades" element={<AdminTrades />} />
               <Route path="deposits" element={<AdminDeposits />} />
               <Route path="withdrawals" element={<AdminWithdrawals />} />
+              <Route path="panel" element={<AdminPanel />} />
             </Route>
             
             <Route path="*" element={<NotFound />} />
