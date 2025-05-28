@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +24,9 @@ import DepositPage from "./pages/dashboard/DepositPage";
 import WithdrawPage from "./pages/dashboard/WithdrawPage";
 import WalletPage from "./pages/dashboard/WalletPage";
 import TradeHistory from "./pages/dashboard/TradeHistory";
+import KYCPage from "./pages/dashboard/KYCPage";
+import EducationPage from "./pages/dashboard/EducationPage";
+import SupportPage from "./pages/dashboard/SupportPage";
 import ProfilePage from "./pages/dashboard/ProfilePage";
 
 // Admin Pages
@@ -67,6 +69,9 @@ const App = () => (
               <Route path="withdraw" element={<WithdrawPage />} />
               <Route path="wallet" element={<WalletPage />} />
               <Route path="history" element={<TradeHistory />} />
+              <Route path="kyc" element={<KYCPage />} />
+              <Route path="education" element={<EducationPage />} />
+              <Route path="support" element={<SupportPage />} />
               <Route path="profile" element={<ProfilePage />} />
             </Route>
 

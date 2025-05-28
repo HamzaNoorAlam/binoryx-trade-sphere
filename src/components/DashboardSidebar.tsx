@@ -11,7 +11,10 @@ import {
   LogOut,
   Download,
   Upload,
-  History
+  History,
+  Shield,
+  BookOpen,
+  MessageCircle
 } from 'lucide-react';
 
 const DashboardSidebar = () => {
@@ -25,6 +28,9 @@ const DashboardSidebar = () => {
     { icon: Download, label: 'Withdraw', path: '/dashboard/withdraw' },
     { icon: Wallet, label: 'Wallet', path: '/dashboard/wallet' },
     { icon: History, label: 'Trade History', path: '/dashboard/history' },
+    { icon: Shield, label: 'KYC Verification', path: '/dashboard/kyc' },
+    { icon: BookOpen, label: 'Education', path: '/dashboard/education' },
+    { icon: MessageCircle, label: 'Support', path: '/dashboard/support' },
     { icon: User, label: 'Profile', path: '/dashboard/profile' }
   ];
 
@@ -39,8 +45,11 @@ const DashboardSidebar = () => {
       <div className="p-4 border-b border-border">
         <div className="text-sm text-muted-foreground">Welcome back</div>
         <div className="font-semibold">{user?.name}</div>
+        <div className="text-sm text-muted-foreground mt-1">
+          {user?.accountType === 'real' ? 'Real Account' : 'Demo Account'}
+        </div>
         <div className="text-2xl font-bold text-primary mt-2">
-          ${user?.balance?.toFixed(2)}
+          ${user?.accountType === 'real' ? user.realBalance.toFixed(2) : user?.demoBalance.toFixed(2)}
         </div>
       </div>
 
