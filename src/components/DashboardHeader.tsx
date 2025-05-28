@@ -4,6 +4,11 @@ import { useAuth } from '@/contexts/AuthContext';
 const DashboardHeader = () => {
   const { user } = useAuth();
 
+  const getCurrentBalance = () => {
+    if (!user) return 0;
+    return user.accountType === 'real' ? user.realBalance : user.demoBalance;
+  };
+
   return (
     <header className="bg-card border-b border-border px-6 py-4">
       <div className="flex items-center justify-between">
@@ -13,7 +18,7 @@ const DashboardHeader = () => {
           <div className="text-right">
             <div className="text-sm text-muted-foreground">Account Balance</div>
             <div className="text-xl font-bold text-primary">
-              ${user?.balance?.toFixed(2)}
+              ${getCurrentBalance().toFixed(2)}
             </div>
           </div>
           

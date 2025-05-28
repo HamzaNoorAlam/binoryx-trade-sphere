@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
@@ -8,10 +7,15 @@ import { Link } from 'react-router-dom';
 const DashboardHome = () => {
   const { user } = useAuth();
 
+  const getCurrentBalance = () => {
+    if (!user) return 0;
+    return user.accountType === 'real' ? user.realBalance : user.demoBalance;
+  };
+
   const stats = [
     {
       title: 'Account Balance',
-      value: `$${user?.balance?.toFixed(2)}`,
+      value: `$${getCurrentBalance().toFixed(2)}`,
       icon: DollarSign,
       change: '+5.2%',
       positive: true

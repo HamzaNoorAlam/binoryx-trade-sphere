@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/contexts/AuthContext';
@@ -6,6 +5,11 @@ import { ArrowDownIcon, ArrowUpIcon, Plus } from 'lucide-react';
 
 const WalletPage = () => {
   const { user } = useAuth();
+
+  const getCurrentBalance = () => {
+    if (!user) return 0;
+    return user.accountType === 'real' ? user.realBalance : user.demoBalance;
+  };
 
   const transactions = [
     { id: '1', type: 'deposit', amount: '+$500.00', description: 'JazzCash Deposit', date: '2024-01-15 14:30' },
@@ -68,7 +72,7 @@ const WalletPage = () => {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-primary">
-              ${user?.balance?.toFixed(2)}
+              ${getCurrentBalance().toFixed(2)}
             </div>
             <p className="text-sm text-muted-foreground">Available for trading</p>
           </CardContent>

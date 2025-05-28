@@ -15,6 +15,11 @@ const WithdrawPage = () => {
   const { user } = useAuth();
   const { toast } = useToast();
 
+  const getCurrentBalance = () => {
+    if (!user) return 0;
+    return user.accountType === 'real' ? user.realBalance : user.demoBalance;
+  };
+
   const withdrawalMethods = [
     { value: 'jazzcash', label: 'JazzCash', fee: '1%' },
     { value: 'easypaisa', label: 'Easypaisa', fee: '1%' },
@@ -32,7 +37,9 @@ const WithdrawPage = () => {
     e.preventDefault();
     
     const withdrawAmount = parseFloat(amount);
-    if (withdrawAmount > (user?.balance || 0)) {
+    const currentBalance = getCurrentBalance();
+    
+    if (withdrawAmount > currentBalance) {
       toast({
         title: 'Insufficient balance',
         description: 'You cannot withdraw more than your available balance.',
@@ -61,7 +68,7 @@ const WithdrawPage = () => {
       <div>
         <h1 className="text-3xl font-bold">Withdraw Funds</h1>
         <p className="text-muted-foreground">
-          Withdraw your profits • Available Balance: ${user?.balance?.toFixed(2)}
+          Withdraw your profits • Available Balance: ${getCurrentBalance().toFixed(2)}
         </p>
       </div>
 
@@ -98,7 +105,7 @@ const WithdrawPage = () => {
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="Enter amount"
                     min="10"
-                    max={user?.balance}
+                    max={getCurrentBalance()}
                     required
                   />
                   <p className="text-xs text-muted-foreground mt-1">
