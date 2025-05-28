@@ -14,16 +14,23 @@ import {
   History,
   Shield,
   BookOpen,
-  MessageCircle
+  MessageCircle,
+  BarChart3
 } from 'lucide-react';
 
 const DashboardSidebar = () => {
   const { logout, user } = useAuth();
   const location = useLocation();
 
+  const getCurrentBalance = () => {
+    if (!user) return 0;
+    return user.accountType === 'real' ? user.realBalance : user.demoBalance;
+  };
+
   const menuItems = [
     { icon: Home, label: 'Dashboard', path: '/dashboard' },
     { icon: TrendingUp, label: 'Trading Room', path: '/dashboard/trading' },
+    { icon: BarChart3, label: 'OlympTrade Style', path: '/dashboard/olymp-trade' },
     { icon: Upload, label: 'Deposit', path: '/dashboard/deposit' },
     { icon: Download, label: 'Withdraw', path: '/dashboard/withdraw' },
     { icon: Wallet, label: 'Wallet', path: '/dashboard/wallet' },
@@ -49,7 +56,7 @@ const DashboardSidebar = () => {
           {user?.accountType === 'real' ? 'Real Account' : 'Demo Account'}
         </div>
         <div className="text-2xl font-bold text-primary mt-2">
-          ${user?.accountType === 'real' ? user.realBalance.toFixed(2) : user?.demoBalance.toFixed(2)}
+          ${getCurrentBalance().toFixed(2)}
         </div>
       </div>
 
